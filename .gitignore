@@ -10,3 +10,4 @@ venv/
 .env
 .kaggle/
 /.venv/
+.git_backup/
