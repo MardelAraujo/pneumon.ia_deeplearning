@@ -1,0 +1,33 @@
+data_paths:
+  base_data_dir: "./data" # Diretório base para todos os dados
+  kaggle_dataset_name: "paultimothymooney/chest-xray-pneumonia"
+  zip_file_name: "chest-xray-pneumonia.zip"
+  extracted_sub_dir_name: "chest_xray" # Nome da pasta raiz dentro do zip
+  train_sub_dir: "train"
+  test_sub_dir: "test"
+
+model_params:
+  target_size: [150, 150]
+  input_shape: [150, 150, 3] # (altura, largura, canais)
+  dense_units: 512
+  dropout_rate: 0.5
+
+training_params:
+  batch_size: 32
+  epochs: 20
+  initial_learning_rate: 0.0001
+  fine_tune_epochs: 10
+  fine_tune_learning_rate: 0.00001
+  fine_tune_unfreeze_layers: 4 # Quantas camadas do VGG16 descongelar do final
+
+callbacks:
+  early_stopping_monitor: 'val_loss'
+  early_stopping_patience: 10
+  early_stopping_restore_best_weights: True
+  reduce_lr_monitor: 'val_loss'
+  reduce_lr_factor: 0.2
+  reduce_lr_patience: 5
+  reduce_lr_min_lr: 0.00001
+
+model_save_dir: "./models/pneumonia_classifier"
+seed: 42 # Para reprodutibilidade
